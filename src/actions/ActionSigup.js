@@ -1,10 +1,7 @@
 import * as ActionTypes from "../constants/ActionTypes";
 import { Actions } from "react-native-router-flux";
 import { AsyncStorage } from "react-native";
-import * as React from "react";
-// import console = require('console');
-// import Spinner from "../containers/Spineer";
-
+import { API_ENDPOINT } from "../const/";
 const isSignuped = bool => {
   return {
     type: ActionTypes.IS_SIGNUPED,
@@ -40,7 +37,13 @@ function resetSignUpAPI() {
 }
 
 const signupAPI = (first_name, email, password) => {
+  console.log(API_ENDPOINT);
   console.log(first_name, email, password);
+  let formdata = new FormData();
+  formdata.append("email", email);
+  formdata.append("password", password);
+  formdata.append("first_name", first_name);
+  formdata.append("last_name", "");
   return dispatch => {
     dispatch(signupIsLoading(true));
     // if (name || !email || !password) {
@@ -48,27 +51,17 @@ const signupAPI = (first_name, email, password) => {
     //     dispatch(signupIsLoading(false));
     //     return;
     // }
-    fetch(
-      "https://mysterious-coast-24284.herokuapp.com/api/v1.0/core/signup/",
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          first_name,
-          first_name,
-          email: email,
-          password: password,
-          last_name: ""
-        })
-      }
-    )
-      .then(res => res.json())
+    fetch(`${API_ENDPOINT}/signup/`, {
+      method: "POST",
+      headers: {
+        // Accept: "application/json",
+        "Content-Type": "multipart/form-data"
+      },
+      body: formdata
+    })
       .then(res => {
         console.log(res);
-        if (res.status === true) {
+        if (res.ok === true) {
           dispatch(signupIsLoading(false));
           dispatch(signupHasError(false));
           dispatch(isSignuped(true));
