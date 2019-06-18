@@ -76,6 +76,7 @@ const loginApi = (email, password) => {
           dispatch(loginIsLoading(false));
           dispatch(loginHasError(false));
           dispatch(isLogged(true));
+          AsyncStorage.setItem("user", JSON.stringify(res.data));
           AsyncStorage.setItem("first_name", res.data.first_name);
           AsyncStorage.setItem("difficulty", String(res.data.dificulty));
           AsyncStorage.setItem("token", res.token);
