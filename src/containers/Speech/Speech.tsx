@@ -13,7 +13,7 @@ import {
 import Tts from "react-native-tts";
 
 type Props = {};
- class SpeechComponent extends Component<Props> {
+class SpeechComponent extends Component<Props> {
   state = {
     voices: [],
     ttsStatus: "initiliazing",
@@ -69,7 +69,6 @@ type Props = {};
   readText = async () => {
     Tts.stop();
     Tts.speak(this.state.text);
-   
   };
 
   setSpeechRate = async rate => {
@@ -99,7 +98,6 @@ type Props = {};
         title={`${item.language} - ${item.name || item.id}`}
         color={this.state.selectedVoice === item.id ? undefined : "#969696"}
         onPress={() => this.onVoicePress(item)}
-        
       />
     );
   };
@@ -131,10 +129,6 @@ type Props = {};
 
         <Text style={styles.label}>{`Selected Voice: ${this.state
           .selectedVoice || ""}`}</Text>
-
-    
-
-       
 
         <TextInput
           style={styles.textInput}
@@ -188,7 +182,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     flex: 1,
     width: "100%",
-    padding:30
+    padding: 30
   }
 });
-export default SpeechComponent
+export default SpeechComponent;

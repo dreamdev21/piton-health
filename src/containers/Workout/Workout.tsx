@@ -74,12 +74,7 @@ class WorkoutComponent extends React.Component {
     const excercise_Name = await AsyncStorage.getItem("excercise_Name");
     console.log(reps, sets, excercise_Name, "excercise_value");
     const token = await AsyncStorage.getItem("token");
-    this.setState(
-      {
-        token: token
-      },
-      () => {}
-    );
+    await this.setState({ token: token });
     this.Exercise_start(reps, sets, excercise_Name);
   }
 
@@ -271,7 +266,8 @@ class WorkoutComponent extends React.Component {
 
   // };
   Exercise_start = async (reps, sets, excercise_Name) => {
-    Tts.stop();
+    console.log(reps, sets, excercise_Name);
+    await Tts.stop();
     Tts.speak(excercise_Name + Number(sets) + "sets " + Number(reps) + "reps");
   };
 

@@ -107,9 +107,15 @@ class LevelComponent extends React.Component {
     }
   }
 
-  UpdateDiffbtn() {
+  async UpdateDiffbtn() {
     //let { difficulty } = this.state;
-    this.props.updateDifficultyApi(this.state.difficulty, this.state.token);
+    let userStr = await AsyncStorage.getItem("user");
+    const user = await JSON.parse(userStr);
+    this.props.updateDifficultyApi(
+      this.state.difficulty,
+      this.state.token,
+      user.profile_data.id
+    );
   }
 
   render() {

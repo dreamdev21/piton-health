@@ -116,15 +116,23 @@ class HomeComponent extends React.Component {
         Math.floor(Math.random() * ExercisedifficultyList.length)
       ];
 
-    excerciselist.reps = 2;
-    excerciselist.steps = 2;
+    excerciselist.reps = Math.floor(
+      Math.random() * ExercisedifficultyList.length
+    );
+    excerciselist.steps = Math.floor(
+      Math.random() * ExercisedifficultyList.length
+    );
+    excerciselist.excercise =
+      ExercisedifficultyList[
+        Math.floor(Math.random() * ExercisedifficultyList.length)
+      ].name;
     console.log(excerciselist.reps, "randomrepsList");
     console.log(excerciselist.steps, "randomstepsList");
     console.log(excerciselist.excercise, "randomexList");
 
-    // AsyncStorage.setItem("reps", excerciselist.reps.toString());
-    // AsyncStorage.setItem("sets", excerciselist.steps.toString());
-    // AsyncStorage.setItem("excercise_Name", excerciselist.excercise);
+    AsyncStorage.setItem("reps", excerciselist.reps.toString());
+    AsyncStorage.setItem("sets", excerciselist.steps.toString());
+    AsyncStorage.setItem("excercise_Name", excerciselist.excercise);
 
     this.setState({
       no_of_rep: no_of_rep,
@@ -188,19 +196,29 @@ class HomeComponent extends React.Component {
     var ex = await AsyncStorage.getItem("ExerciseDificultyList");
     console.log(ex);
     var ExercisedifficultyList = await JSON.parse(ex);
-    console.log(ExercisedifficultyList);
+    console.log(ExercisedifficultyList.length);
     var excerciselist =
       ExercisedifficultyList[
         Math.floor(Math.random() * ExercisedifficultyList.length)
       ];
+    excerciselist.reps = Math.floor(
+      Math.random() * ExercisedifficultyList.length
+    );
+    excerciselist.steps = Math.floor(
+      Math.random() * ExercisedifficultyList.length
+    );
+    excerciselist.excercise =
+      ExercisedifficultyList[
+        Math.floor(Math.random() * ExercisedifficultyList.length)
+      ].name;
     console.log(excerciselist);
     console.log(excerciselist.reps, "randomrepsList");
     console.log(excerciselist.steps, "randomstepsList");
     console.log(excerciselist.excercise, "randomexList");
 
-    // AsyncStorage.setItem("reps", excerciselist.reps.toString());
-    // AsyncStorage.setItem("sets", excerciselist.steps.toString());
-    // AsyncStorage.setItem("excercise_Name", excerciselist.excercise);
+    await AsyncStorage.setItem("reps", excerciselist.reps.toString());
+    await AsyncStorage.setItem("sets", excerciselist.steps.toString());
+    await AsyncStorage.setItem("excercise_Name", excerciselist.excercise);
     //Actions.Workout()
     this.props.navigation.navigate("Workout", {
       emitter: this._emitter

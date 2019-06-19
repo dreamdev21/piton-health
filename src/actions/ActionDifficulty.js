@@ -18,35 +18,36 @@ const updateDiffIsLoading = bool => {
 };
 
 const updateDifficultyApi = (difficulty, token, userId) => {
-  console.log(difficulty);
-  return dispatch => {
-    fetch(`${API_ENDPOINT}/users/${userId}/`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      },
-      body: JSON.stringify({
-        dificulty: difficulty
-      })
-    })
-      .then(res => res.json())
-      .then(res => {
-        if (res.status === true) {
-          dispatch(updateDiffHasError(false));
-          Actions.Home();
-        } else {
-          dispatch(updateDiffHasError(res.msg));
-        }
-      })
-      .catch(e => {
-        console.log(e);
-        dispatch(
-          updateDiffHasError("Oops, something went wrong, server error!")
-        );
-      });
-  };
+  console.log(difficulty, token, userId);
+  Actions.Home();
+  // return dispatch => {
+  //   fetch(`${API_ENDPOINT}/users/${userId}/`, {
+  //     method: "PUT",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + token
+  //     },
+  //     body: JSON.stringify({
+  //       dificulty: difficulty
+  //     })
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       if (res.status === true) {
+  //         dispatch(updateDiffHasError(false));
+  //         Actions.Home();
+  //       } else {
+  //         dispatch(updateDiffHasError(res.msg));
+  //       }
+  //     })
+  //     .catch(e => {
+  //       console.log(e);
+  //       dispatch(
+  //         updateDiffHasError("Oops, something went wrong, server error!")
+  //       );
+  //     });
+  // };
 };
 
 export default {
